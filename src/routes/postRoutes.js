@@ -10,6 +10,8 @@ router.get('/:id', postController.fetchOne) ;
 
 router.post('/', postController.create) ;
 
+router.put('/:id', postController.update) ;
+
 router.delete('/:id', postController.delete) ;
 
 module.exports = router;

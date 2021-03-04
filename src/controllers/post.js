@@ -4,7 +4,7 @@ exports.fetchOne = (req, res, next) => {
   return knex
     .select("*")
     .from("post")
-    .where({ id: req.params.id, userId: req.authData.userId  })
+    .where({ id: req.params.id, userId: req.authData.userId })
     .then((rows) => res.json({ data: rows }));
 };
 
@@ -21,7 +21,7 @@ exports.create = (req, res, next) => {
     .insert({
       title: req.body.title,
       userId: req.authData.userId,
-      date: new Date(),
+      date: req.body.date,
       story: req.body.story,
     })
     .then((data) => res.json({ msg: "Post Created" }))
@@ -35,5 +35,20 @@ exports.delete = (req, res, next) => {
       id: req.params.id,
     })
     .then((data) => res.json({ msg: "Post Deleted" }))
+    .catch((err) => res.json({ err: err.detail }));
+};
+
+exports.update = (req, res, next) => {
+  knex("post")
+    .where({
+      id: req.params.id,
+    })
+    .update({
+      title: req.body.title,
+      userId: req.authData.userId,
+      date: req.body.date,
+      story: req.body.story,
+    })
+    .then((data) => res.json({ msg: "Post Updated" }))
     .catch((err) => res.json({ err: err.detail }));
 };

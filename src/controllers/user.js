@@ -4,7 +4,7 @@ const knex = require("../db")
 exports.fetchOne = (req, res, next, params) => {
   return knex.select("*")
   .from("user")
-  .where("email", params.email)
+  .where(params)
   .then(rows => rows)
 }
 
@@ -18,7 +18,7 @@ exports.create = (req, res, next) => {
     email: req.body.email,
     password: hash,
   }).then(
-      data => res.json({msg: "User Created"})
+      data => res.status(200).json({msg: "User Created"})
   ).catch(err => res.json({err : err.detail}))
 
 }
