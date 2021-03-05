@@ -1,5 +1,6 @@
-const bcrypt = require('bcrypt');
 const knex = require("../db")
+
+const bcrypt = require('bcrypt');
 
 exports.fetchOne = (req, res, next, params) => {
   return knex.select("*")

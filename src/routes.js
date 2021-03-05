@@ -2,10 +2,12 @@ const express = require("express");
 
 const router = express.Router();
 
+const jwt = require("jsonwebtoken");
+
 const authRoutes = require("./routes/authRoutes");
 const postRoutes = require("./routes/postRoutes");
 
-const jwt = require("jsonwebtoken");
+
 
 function authenticateToken(req, res, next) {
   const token = req.headers["authorization"];
