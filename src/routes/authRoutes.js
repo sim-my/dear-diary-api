@@ -14,7 +14,7 @@ router.post("/login", (req, res, next) => {
     .fetchOne(req, res, next, { email: req.body.email })
     .then((data) => {
       if (data.length === 0) {
-        res.json({ msg: "No such user" });
+        res.json({ err: "No such user" });
       }
       if (data.length > 0) {
         if (bcrypt.compareSync(req.body.password, data[0].password)) {
@@ -24,7 +24,7 @@ router.post("/login", (req, res, next) => {
           });
           res.json({ userId: data[0].id, token, first_name: data[0].first_name, last_name: data[0].last_name });
         } else {
-          res.json({ msg: "Password mismatch" });
+          res.json({ err: "Password mismatch" });
         }
       }
     })
